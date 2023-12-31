@@ -133,11 +133,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EllipseShape.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="RoundedRectangle.cpp" />
+    <ClCompile Include="RoundedRectangleConstructed.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EllipseShape.h" />
     <ClInclude Include="RoundedRectangle.h" />
+    <ClInclude Include="RoundedRectangleConstructed.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

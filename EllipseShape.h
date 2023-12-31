@@ -1,12 +1,10 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 
-class RoundedRectangle : public sf::RectangleShape
+class EllipseShape : public sf::Shape
 {
 public:
-
-
-    explicit RoundedRectangle(const sf::Vector2f& radius = sf::Vector2f(0, 0));
+    explicit EllipseShape(const sf::Vector2f& radius = sf::Vector2f(0, 0));
 
     void setRadius(const sf::Vector2f& radius);
 
@@ -19,3 +17,4 @@ public:
 private:
     sf::Vector2f m_radius;
 };
+
