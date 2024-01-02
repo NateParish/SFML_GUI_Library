@@ -19,26 +19,34 @@ int main()
 	settings.antialiasingLevel = 8;
 
 	rect.setFillColor(sf::Color(100, 48, 180));
-	rect.setSize(sf::Vector2f(400, 300));
-	rect.setPosition(sf::Vector2f(200, 100));
+	rect.setSize(sf::Vector2f(750, 500));
+	rect.setPosition(sf::Vector2f(100, 100));
 	rect.setCornerRadius(10);
-	rect.setPointCount(10);
+	rect.setPointCount(2);
+
+
+
+
+
 
 	RoundedRectangle ellipse;
+	ellipse.setPointsPerCorner(10);
 	ellipse.setFillColor(sf::Color(0, 0, 255));
-	//ellipse.setPosition(sf::Vector2f(50, 50));
-	ellipse.setRadius(sf::Vector2f(100, 100));
-	ellipse.setSize(sf::Vector2f(500, 500));
-	ellipse.setPosition(sf::Vector2f(50, 50));
+	ellipse.setPosition(sf::Vector2f(150, 50));
+	ellipse.setRadius(sf::Vector2f(35, 100));
+	ellipse.setSize(sf::Vector2f(750, 500));
+	ellipse.setOutlineColor(sf::Color(255, 0, 0));
+	ellipse.setOutlineThickness(10);
+	//ellipse.setPosition(sf::Vector2f(400, 50));
 
 
 
 
 
-	int initialWindowWidth = 1024;
+	int initialWindowWidth = 1500;
 	int initialWindowHeight = 768;
 	std::string windowTitle = "GUI Testing";
-	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML shapes", sf::Style::Default, settings);
+	sf::RenderWindow window(sf::VideoMode(initialWindowWidth, initialWindowHeight), "SFML shapes", sf::Style::Default, settings);
 	//sf::RenderWindow window(sf::VideoMode(initialWindowWidth, initialWindowHeight), windowTitle);
 	sf::RenderWindow* windowPtr(&window);
 
