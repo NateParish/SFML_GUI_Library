@@ -20,7 +20,7 @@ const sf::Vector2f& RoundedRectangle::getRadius() const
 
 std::size_t RoundedRectangle::getPointCount() const
 {
-    return 12;
+    return 11;
 }
 
 sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
@@ -31,8 +31,8 @@ sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
 
     float x = 0;
     float y = 0;
-    
-
+    int count(0);
+    int circleSegmentCount = 12;
     float pointsPerCorner = 2;
 
     int p1 = 0;
@@ -43,10 +43,15 @@ sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
     int p4 = p3 + 1;
 
     int c2Start = p4 + 1;
-    int p5 = p4 + pointsPerCorner + 1;
+    int p5 = c2Start + pointsPerCorner;
     int p6 = p5+1;
-    int p7 = 10;
-    int p8 = 11;
+
+    int c3Start = p5 + 1;
+
+    int p7 = c3Start + pointsPerCorner;;
+    int p8 = p7+1;
+
+    int c4Start = p8 + 1;
 
     
     if (index == p1)
@@ -54,17 +59,19 @@ sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
         x = getRadius().x;
         y = 0;
         //std::cout << p1 << index << std::endl;
-        std::cout << "INDEX " << index << " x " << x << " y " << y << std::endl;
+        std::cout << "INDEX " << index << std::endl;
+        count++;
     }
     if (index == p2)
     {
         x = getSize().x - getRadius().x;
         y = 0;
         //std::cout << p2 << index << std::endl;
-        std::cout << "INDEX " << index << " x " << x << " y " << y << std::endl;
+        std::cout << "INDEX " << index << std::endl;
+        count++;
     }
 
-
+    //*****************  CURVE 1  ******************************
     if (index >= 2)
         
     {
@@ -72,17 +79,20 @@ sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
         {
             int cornerIndex = pointsPerCorner - (index - c1Start);
 
-            float angle = 2 * pi / 12;
+            float angle = 2 * pi / circleSegmentCount;
             float vx = cos(cornerIndex * angle);
             float vy = sin(cornerIndex * angle);
             float xVector = getRadius().x * vx;
             float yVector = getRadius().x * vy;
 
             x = getSize().x - getRadius().x + xVector;
-            y = getRadius().x - vy * getRadius().x;
+            y = getRadius().x - yVector;
             //std::cout << "CURVE:" << index << std::endl;
             
-            std::cout << "CURVE 1 INDEX " << index << " x " << x << " y " << y << std::endl;
+            std::cout << std::endl << std::endl << "CORNER Index " << cornerIndex << std::endl << std::endl;
+            count++;
+            std::cout << "ANGLE: " << angle << "  xVector: " << xVector << " " << " yVector: " << yVector << " X: " << x << " Y: " << y << std::endl;
+
 
         }
 
@@ -93,7 +103,8 @@ sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
         x = getSize().x;
         y = getRadius().x;
         //std::cout << p3 << index << std::endl;
-        std::cout << "INDEX " << index << " x " << x << " y " << y << std::endl;
+        std::cout << "INDEX " << index << std::endl;
+        count++;
     }
 
 
@@ -102,8 +113,11 @@ sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
         x = getSize().x;
         y = getSize().y - getRadius().x;
         //std::cout << p4 << index << std::endl;
-        std::cout <<"INDEX " << index << " x " << x << " y " << y << std::endl;
+        std::cout << "INDEX " << index << " X: " << x << " Y: " << y << std::endl;
+        count++;
     }
+
+    //*****************  CURVE 2  ******************************
 
     if (index > p4)
 
@@ -112,21 +126,30 @@ sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
         {
             //std::cout << index << " " << p4 << " " << p5 <<std::endl;
 
-            int cornerIndex = pointsPerCorner - (index - c2Start);
+            int cornerIndex = (index - c2Start) + 1;
 
-            float angle = 2 * pi / 12;
+            float angle = 2*pi - ((2 * pi / circleSegmentCount));
             float vx = cos(cornerIndex * angle);
             float vy = sin(cornerIndex * angle);
             float xVector = getRadius().x * vx;
             float yVector = getRadius().x * vy;
 
+            x = getSize().x- getRadius().x + xVector;
+            y = getSize().y - getRadius().x - yVector;
+
+            //x = getSize().x + xVector;
+            //y = getSize().y + yVector - getRadius().x;
+
             //x = getSize().x - getRadius().x + xVector;
             //y = getSize().y - getRadius().x + yVector;
             //y = getSize().y - getRadius().x;
             //x = 500 - 10 * (index-5);
-            x = 230 + 20 * index;
-            y = 350 + 50 * index;
-            std::cout << "CURVE 2 INDEX " << index << " x " << x << " y " << y << std::endl;
+            //x = 230 + 20 * index;
+            //y = 350 + 50 * index;
+            std::cout << "INDEX " << index << " - CURVE" << std::endl;
+            std::cout << std::endl << std::endl <<"CORNER Index " << cornerIndex << std::endl << std::endl;
+            std::cout << "ANGLE: " << angle << "  xVector: " << xVector << " " << " yVector: " << yVector << " X: " << x << " Y: " << y << std::endl;
+            count++;
 
         }
 
@@ -139,34 +162,81 @@ sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
         x = getSize().x - getRadius().x;
         y = getSize().y;
         //std::cout << p5 << index << std::endl;
-        std::cout << "INDEX XX" << index << " x " << x << " y " << y << std::endl;
+        std::cout << "INDEX " << index << std::endl;
+        count++;
     }
     if (index == p6)
     {
         x = getRadius().x;
         y = getSize().y;
         //std::cout << p6 << index << std::endl;
-        std::cout << "INDEX XY" << index << " x " << x << " y " << y << std::endl;
+        std::cout << "INDEX " << index << std::endl;
+        count++;
     }
+
+    //*****************  CURVE 3  ******************************
+
+    if (index > p6)
+
+    {
+        if (index < p7)
+        {
+            int cornerIndex = (index - c2Start) + 1;
+
+            float angle = 2 * pi - ((2 * pi / circleSegmentCount));
+            float vx = cos(cornerIndex * angle);
+            float vy = sin(cornerIndex * angle);
+            float xVector = getRadius().x * vx;
+            float yVector = -1*(getRadius().x * vy);
+
+            x = getRadius().x - xVector;
+            y = getSize().y / 2  - yVector ;
+            count++;
+            std::cout << "INDEX " << index << " - CURVE" << std::endl;
+            std::cout << "ANGLE: " << angle << "  xVector: " << xVector << " " << " yVector: " << yVector << " X: " << x << " Y: " << y << std::endl;
+
+        }
+    }
+
     if (index == p7)
     {
         x = 0;
         y = getSize().y - getRadius().x;
         //std::cout << p7 << index << std::endl;
-        std::cout << "INDEX " << index << " x " << x << " y " << y << std::endl;
+        std::cout << "INDEX " << index << std::endl;
+        count++;
     }
     if (index == p8)
     {
         x = 0;
         y = getRadius().x;
        // std::cout << p8 << index << std::endl;
-        std::cout << "INDEX " << index << " x " << x << " y " << y << std::endl;
+        std::cout << "INDEX " << index << std::endl;
+        count++;
     }
+     // ******** CURVE 4 ***************
+    if (index > p8)
+
+    {
+        x = getSize().x;
+        x = getSize().y;
+        count++;
+        std::cout << "INDEX " << index << " - CURVE" << std::endl;
+
+        
+    }
+
+
+
+    //Curve4 
+
 
     //float angle = index * 2 * pi / getPointCount() - pi / 2;
     //float x = std::cos(angle) * m_radius.x;
     //float y = std::sin(angle) * m_radius.y;
 
     return sf::Vector2f(x,y);
+
+    std::cout << count << std::endl;
 }
 

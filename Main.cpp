@@ -26,9 +26,10 @@ int main()
 
 	RoundedRectangle ellipse;
 	ellipse.setFillColor(sf::Color(0, 0, 255));
-	ellipse.setPosition(sf::Vector2f(50, 50));
+	//ellipse.setPosition(sf::Vector2f(50, 50));
 	ellipse.setRadius(sf::Vector2f(100, 100));
 	ellipse.setSize(sf::Vector2f(500, 500));
+	ellipse.setPosition(sf::Vector2f(50, 50));
 
 
 
