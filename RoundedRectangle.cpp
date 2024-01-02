@@ -20,7 +20,7 @@ const sf::Vector2f& RoundedRectangle::getRadius() const
 
 std::size_t RoundedRectangle::getPointCount() const
 {
-    return 10;
+    return 12;
 }
 
 sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
@@ -45,8 +45,8 @@ sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
     int c2Start = p4 + 1;
     int p5 = p4 + pointsPerCorner + 1;
     int p6 = p5+1;
-    int p7 = 8;
-    int p8 = 9;
+    int p7 = 10;
+    int p8 = 11;
 
     
     if (index == p1)
@@ -123,8 +123,9 @@ sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
             //x = getSize().x - getRadius().x + xVector;
             //y = getSize().y - getRadius().x + yVector;
             //y = getSize().y - getRadius().x;
-            x = 500 - 10 * (index-5);
-            y = 350 + 10 * index;
+            //x = 500 - 10 * (index-5);
+            x = 230 + 20 * index;
+            y = 350 + 50 * index;
             std::cout << "CURVE 2 INDEX " << index << " x " << x << " y " << y << std::endl;
 
         }
