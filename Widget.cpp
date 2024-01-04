@@ -5,7 +5,7 @@ Widget::Widget()
 	x = 0;
 	y = 0;
 	width = 150;
-	height = 50;
+	height = 30;
 }
 
 Widget::~Widget()
