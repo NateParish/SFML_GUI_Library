@@ -1,18 +1,18 @@
 #pragma once
-#include "SFML/graphics.hpp"
 #include "RoundedRectangleShape.h"
+#include "Widget.h"
 #include <iostream>
 #include <string>
 
-class Button
+class Button : public Widget
 {
 
 private:
 
-	float x;
-	float y;
-	float width;
-	float height;
+	//float x;
+	//float y;
+	//float width;
+	//float height;
 	float radius;
 
 	sf::Color bgColor;

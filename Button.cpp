@@ -2,10 +2,7 @@
 
 Button::Button()
 {
-	x = 300;
-	y = 300;
-	width = 150;
-	height = 30;
+
 	radius = 5;
 	bgColor = sf::Color(220, 220, 220);
 	highlightColor = sf::Color(235, 235, 235);
@@ -22,17 +19,17 @@ Button::Button()
 	shadowThicknessRight = 0;
 
 	rect;
-	rect.setSize(sf::Vector2f(width,height));
+	rect.setSize(sf::Vector2f(getWidth(), getHeight()));
 	rect.setRadius(radius);
-	rect.setPosition(x, y);
+	rect.setPosition(getX(), getY());
 	rect.setFillColor(bgColor);
 	rect.setOutlineThickness(outlineThickness);
 	rect.setOutlineColor(outlineColor);
 
 	shadowRect;
-	shadowRect.setSize(sf::Vector2f(width + shadowThicknessLeft + shadowThicknessRight, height + shadowThicknessTop + shadowThicknessBottom));
+	shadowRect.setSize(sf::Vector2f(getWidth() + shadowThicknessLeft + shadowThicknessRight, getHeight() + shadowThicknessTop + shadowThicknessBottom));
 	shadowRect.setRadius(radius);
-	shadowRect.setPosition(x, y);
+	shadowRect.setPosition(getX(), getY());
 	shadowRect.setFillColor(shadowColor);
 	shadowRect.setOutlineThickness(shadowOutlineThickness);
 	shadowRect.setOutlineColor(shadowOutlineColor);
@@ -51,7 +48,7 @@ Button::Button()
 	buttonLabel.setFont(labelFont);
 	buttonLabel.setFillColor(textColor);
 	buttonLabel.setCharacterSize(20);
-	buttonLabel.setPosition(x + textPadX, y + textPadY);
+	buttonLabel.setPosition(getX() + textPadX, getY() + textPadY);
 
 }
 
@@ -70,13 +67,13 @@ bool Button::CheckIfMouseHover()
 	bool mouseOverButton = false;
 
 
-	if (mousePosX >= x)
+	if (mousePosX >= getX())
 	{
-		if (mousePosX <= x + width)
+		if (mousePosX <= getX() + getWidth())
 		{
-			if (mousePosY >= y)
+			if (mousePosY >= getY())
 			{
-				if (mousePosY <= y + height)
+				if (mousePosY <= getY() + getHeight())
 				{
 					mouseOverButton = true;
 				}				
@@ -115,12 +112,12 @@ void Button::setWindow(sf::RenderWindow* windowPtr)
 
 void Button::SetPosition(float posX, float posY)
 {
-	x = posX;
-	y = posY;
+	setX(posX);
+	setY(posY);
 
-	rect.setPosition(sf::Vector2f(x, y));
-	buttonLabel.setPosition(sf::Vector2f(x + textPadX, y + textPadY));
-	shadowRect.setPosition(sf::Vector2f(x - shadowThicknessLeft, y - shadowThicknessTop));
+	rect.setPosition(sf::Vector2f(getX(), getY()));
+	buttonLabel.setPosition(sf::Vector2f(getX() + textPadX, getY() + textPadY));
+	shadowRect.setPosition(sf::Vector2f(getX() - shadowThicknessLeft, getY() - shadowThicknessTop));
 }
 
 void Button::SetTextPosition(float posX, float posY)
@@ -132,7 +129,7 @@ void Button::SetTextPad(float xPad, float yPad)
 {
 	textPadX = xPad;
 	textPadY = yPad;
-	buttonLabel.setPosition(sf::Vector2f(x + textPadX, y + textPadY));
+	buttonLabel.setPosition(sf::Vector2f(getX() + textPadX, getY() + textPadY));
 }
 
 void Button::OnClick()

@@ -36,6 +36,8 @@ int main()
 
 	GUI testGUI; 
 	testGUI.addButton(&testButton);
+	testButton.setWidth(150);
+	testButton.setHeight(40);
 	//testButton.SetTextPad(10, 0);
 	testButton.SetPosition(250, 250);
 	//testButton.SetTextPad(30, 0);
