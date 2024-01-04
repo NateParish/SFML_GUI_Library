@@ -1,16 +1,18 @@
-#include "RoundedRectangle.h"
-#include <iostream>
-#include <cmath>
+#include "RoundedRectangleShape.h"
 
-RoundedRectangle::RoundedRectangle(const sf::Vector2f& radius) : m_radius(radius)
+
+RoundedRectangle::RoundedRectangle()
 {
     pointsPerCorner = 10;
+    cornerRadius = 0;
     update();
 }
 
-void RoundedRectangle::setRadius(const sf::Vector2f& radius)
+void RoundedRectangle::setRadius(float cornerRadius)
 {
-    m_radius = radius;
+
+    const sf::Vector2f radiusAsVector(cornerRadius,0);      
+    m_radius = radiusAsVector;
     update();
 }
 
@@ -22,7 +24,6 @@ const sf::Vector2f& RoundedRectangle::getRadius() const
 void RoundedRectangle::setPointsPerCorner(const int points)
 {
     pointsPerCorner = points;
-    std::cout << pointsPerCorner << std::endl;
 }
 
 int RoundedRectangle::getPointsPerCorner() const

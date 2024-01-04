@@ -133,15 +133,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="EllipseShape.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="RoundedRectangle.cpp" />
+    <ClCompile Include="RoundedRectangleShape.cpp" />
     <ClCompile Include="RoundedRectangleConstructed.cpp" />
+    <ClCompile Include="GUI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
     <ClInclude Include="EllipseShape.h" />
-    <ClInclude Include="RoundedRectangle.h" />
+    <ClInclude Include="RoundedRectangleShape.h" />
     <ClInclude Include="RoundedRectangleConstructed.h" />
+    <ClInclude Include="GUI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

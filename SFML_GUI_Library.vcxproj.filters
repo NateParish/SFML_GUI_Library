@@ -18,7 +18,7 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RoundedRectangle.cpp">
+    <ClCompile Include="RoundedRectangleShape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EllipseShape.cpp">
@@ -27,15 +27,27 @@
     <ClCompile Include="RoundedRectangleConstructed.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RoundedRectangle.h">
+    <ClInclude Include="RoundedRectangleShape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EllipseShape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RoundedRectangleConstructed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

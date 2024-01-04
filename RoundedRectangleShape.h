@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+#include <cmath>
 #include "SFML/Graphics.hpp"
 
 class RoundedRectangle : public sf::RectangleShape
@@ -6,9 +8,9 @@ class RoundedRectangle : public sf::RectangleShape
 public:
 
 
-    explicit RoundedRectangle(const sf::Vector2f& radius = sf::Vector2f(0, 0));
+    RoundedRectangle();
 
-    void setRadius(const sf::Vector2f& radius);
+    void setRadius(float radius);
 
     const sf::Vector2f& getRadius() const;
 
@@ -23,6 +25,7 @@ public:
 private:
 
     int pointsPerCorner;
+    float cornerRadius;
 
     sf::Vector2f m_radius;
 };
