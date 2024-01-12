@@ -139,6 +139,7 @@
     <ClCompile Include="RoundedRectangleShape.cpp" />
     <ClCompile Include="RoundedRectangleConstructed.cpp" />
     <ClCompile Include="GUI.cpp" />
+    <ClCompile Include="StarShape.cpp" />
     <ClCompile Include="Widget.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +148,7 @@
     <ClInclude Include="RoundedRectangleShape.h" />
     <ClInclude Include="RoundedRectangleConstructed.h" />
     <ClInclude Include="GUI.h" />
+    <ClInclude Include="StarShape.h" />
     <ClInclude Include="Widget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

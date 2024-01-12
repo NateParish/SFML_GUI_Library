@@ -4,42 +4,29 @@ Button::Button()
 {
 
 	radius = 5;
-	bgColor = sf::Color(220, 220, 220);
-	highlightColor = sf::Color(235, 235, 235);
-	outlineColor = sf::Color(200, 200, 200);
-	outlineHighlightColor = sf::Color(200, 200, 200);
-	outlineThickness = 1;
-	
-	shadowColor = sf::Color(150, 150, 150, 35);
-	shadowOutlineColor = shadowColor;
-	shadowOutlineThickness = outlineThickness;
-	shadowThicknessBottom = 3;
-	shadowThicknessTop = 0;
-	shadowThicknessLeft = 0;
-	shadowThicknessRight = 0;
 
 	rect;
 	rect.setSize(sf::Vector2f(getWidth(), getHeight()));
 	rect.setRadius(radius);
 	rect.setPosition(getX(), getY());
-	rect.setFillColor(bgColor);
-	rect.setOutlineThickness(outlineThickness);
-	rect.setOutlineColor(outlineColor);
+	rect.setFillColor(getBGColor());
+	rect.setOutlineThickness(getOutlineThickness());
+	rect.setOutlineColor(getOutlineColor());
 
 	shadowRect;
-	shadowRect.setSize(sf::Vector2f(getWidth() + shadowThicknessLeft + shadowThicknessRight, getHeight() + shadowThicknessTop + shadowThicknessBottom));
+	shadowRect.setSize(sf::Vector2f(getWidth() + getShadowThicknessLeft() + getShadowThicknessRight(), getHeight() + getShadowThicknessTop() + getShadowThicknessBottom ()));
 	shadowRect.setRadius(radius);
 	shadowRect.setPosition(getX(), getY());
-	shadowRect.setFillColor(shadowColor);
-	shadowRect.setOutlineThickness(shadowOutlineThickness);
-	shadowRect.setOutlineColor(shadowOutlineColor);
+	shadowRect.setFillColor(getShadowColor());
+	shadowRect.setOutlineThickness(getShadowOutlineThickness());
+	shadowRect.setOutlineColor(getShadowOutlineColor());
 		
 
 	window;
 	labelText = "Button Name";
 	textPadX = 15;
 	textPadY = 2;
-	textColor = sf::Color(90, 90, 90);
+	textColor = sf::Color(50, 50, 50);
 	textHighlightColor = sf::Color(25, 25, 25);
 
 
@@ -76,6 +63,7 @@ bool Button::CheckIfMouseHover()
 				if (mousePosY <= getY() + getHeight())
 				{
 					mouseOverButton = true;
+					
 				}				
 			}			
 		}
@@ -86,15 +74,15 @@ bool Button::CheckIfMouseHover()
 
 void Button::Highlight()
 {
-	rect.setFillColor(highlightColor);
-	rect.setOutlineColor(outlineHighlightColor);
+	rect.setFillColor(getHighlightColor());
+	rect.setOutlineColor(getOutlineHighlightColor());
 	buttonLabel.setFillColor(textHighlightColor);	
 }
 
 void Button::NoHighlight()
 {
-	rect.setFillColor(bgColor);
-	rect.setOutlineColor(outlineColor);
+	rect.setFillColor(getBGColor());
+	rect.setOutlineColor(getOutlineColor());
 	buttonLabel.setFillColor(textColor);
 }
 
@@ -117,7 +105,7 @@ void Button::SetPosition(float posX, float posY)
 
 	rect.setPosition(sf::Vector2f(getX(), getY()));
 	buttonLabel.setPosition(sf::Vector2f(getX() + textPadX, getY() + textPadY));
-	shadowRect.setPosition(sf::Vector2f(getX() - shadowThicknessLeft, getY() - shadowThicknessTop));
+	shadowRect.setPosition(sf::Vector2f(getX() - getShadowThicknessLeft(), getY() - getShadowThicknessTop()));
 }
 
 void Button::SetTextPosition(float posX, float posY)

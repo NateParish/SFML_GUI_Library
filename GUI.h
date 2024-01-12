@@ -2,6 +2,7 @@
 #include <iostream>
 #include "SFML/graphics.hpp"
 #include "Button.h"
+#include "StarShape.h"
 
 class GUI
 {

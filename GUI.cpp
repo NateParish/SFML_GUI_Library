@@ -34,8 +34,16 @@ void GUI::Launch()
 	bool setToArrowCursor = false;
 	bool mouseClickFlag = false;
 	bool mouseReleaseFlag = false;
+	bool triggered = false;
 
 	auto b1funct = Button1Function;
+
+	StarShape star;
+	star.setRadius(sf::Vector2f(50, 25));
+	star.setFillColor(sf::Color(0, 255, 0));
+	star.setPosition(450, 200);
+	star.setOutlineColor(sf::Color(0, 0, 0));
+	star.setOutlineThickness(5);
 
 	sf::Cursor handCursor;
 	handCursor.loadFromSystem(sf::Cursor::Hand);
@@ -50,8 +58,7 @@ void GUI::Launch()
 		window.clear(sf::Color(240, 240, 240));
 		setToArrowCursor = true;
 		setToHandCursor = false;
-
-
+		
 
 
 		while (window.pollEvent(e))
@@ -72,10 +79,13 @@ void GUI::Launch()
 			if (e.type == sf::Event::MouseButtonPressed)
 			{
 				mouseClickFlag = true;
+				
 			}
 			if (e.type == sf::Event::MouseButtonReleased)
 			{
+				mouseClickFlag = false;
 				mouseReleaseFlag = true;
+				triggered = false;
 			}
 
 		}
@@ -87,6 +97,23 @@ void GUI::Launch()
 				button->Highlight();
 				setToHandCursor = true;
 				setToArrowCursor = false;
+
+
+
+				if (mouseClickFlag)
+				{
+					if (!triggered)
+					{
+						button->OnClick();
+						triggered = true;
+					}
+				}
+
+				else
+				{
+					button->setSelected(false);
+				}
+
 			}
 			else
 			{
@@ -94,7 +121,6 @@ void GUI::Launch()
 			}
 
 			button->Draw();
-
 		}
 
 		if (setToHandCursor)
@@ -106,7 +132,7 @@ void GUI::Launch()
 			window.setMouseCursor(arrowCursor);
 		}
 
-		
+		window.draw(star);
 		window.display();
 
 	}

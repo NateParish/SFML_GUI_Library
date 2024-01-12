@@ -28,4 +28,8 @@ private:
     float cornerRadius;
 
     sf::Vector2f m_radius;
+
+    sf::Vector2f calculateCornerVectors(int cornerIndex) const;
+
+
 };

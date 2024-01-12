@@ -41,14 +41,29 @@ std::size_t RoundedRectangle::getPointCount() const
     return totalPoints;
 }
 
-sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
+sf::Vector2f RoundedRectangle::calculateCornerVectors(int cornerIndex) const
 {
     static const float pi = 3.141592654;
     int points = getPointsPerCorner();
+    int circleSegmentCount = 4 * (points + 1);
+    float angle = 2 * pi / circleSegmentCount;
 
+    float xPart = cos(cornerIndex * angle);
+    float yPart = sin(cornerIndex * angle);
+    float xVector = getRadius().x * xPart;
+    float yVector = getRadius().x * yPart;
+
+    sf::Vector2f output(xVector, yVector);
+
+    return output;
+}
+
+sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
+{
+
+    int points = getPointsPerCorner();
     float x = 0;
     float y = 0;
-    int circleSegmentCount = 4 * (points+1);
 
     int p1 = 0;
     int p2 = 1;
@@ -74,13 +89,11 @@ sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
     {
         x = getRadius().x;
         y = 0;
-
     }
     if (index == p2)
     {
         x = getSize().x - getRadius().x;
         y = 0;
-
     }
 
     //*********** Top Right Curve *****************
@@ -91,15 +104,9 @@ sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
         if (index < p3)
         {
             int cornerIndex = points - (index - c1Start);
-
-            float angle = 2 * pi / circleSegmentCount;
-            float vx = cos(cornerIndex * angle);
-            float vy = sin(cornerIndex * angle);
-            float xVector = getRadius().x * vx;
-            float yVector = getRadius().x * vy;
-
-            x = getSize().x - getRadius().x + xVector;
-            y = getRadius().x - yVector;
+            sf::Vector2f vector = calculateCornerVectors(cornerIndex);
+            x = getSize().x - getRadius().x + vector.x;
+            y = getRadius().x - vector.y;
 
         }
     }
@@ -111,7 +118,6 @@ sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
         x = getSize().x;
         y = getRadius().x;
     }
-
 
     if (index == p4)
     {
@@ -128,15 +134,9 @@ sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
         {
 
             int cornerIndex = (index - c2Start) + 1;
-
-            float angle = 2*pi - ((2 * pi / circleSegmentCount));
-            float vx = cos(cornerIndex * angle);
-            float vy = sin(cornerIndex * angle);
-            float xVector = getRadius().x * vx;
-            float yVector = getRadius().x * vy;
-
-            x = getSize().x- getRadius().x + xVector;
-            y = getSize().y - getRadius().x - yVector;
+            sf::Vector2f vector = calculateCornerVectors(cornerIndex);
+            x = getSize().x- getRadius().x + vector.x;
+            y = getSize().y - getRadius().x + vector.y;
 
         }
     }
@@ -162,15 +162,9 @@ sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
         if (index < p7)
         {
             int cornerIndex = points - (index - c3Start) + 1;
-
-            float angle = 2 * pi - ((2 * pi / circleSegmentCount));
-            float vx = cos(cornerIndex * angle);
-            float vy = sin(cornerIndex * angle);
-            float xVector = getRadius().x * vx;
-            float yVector = (getRadius().x * vy);
-
-            x = getRadius().x - xVector;
-            y = getSize().y - getRadius().x - yVector;
+            sf::Vector2f vector = calculateCornerVectors(cornerIndex);
+            x = getRadius().x - vector.x;
+            y = getSize().y - getRadius().x + vector.y;
         }
     }
 
@@ -194,15 +188,9 @@ sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
 
     {
         int cornerIndex = (index - c4Start) + 1;
-
-        float angle = 2 * pi - ((2 * pi / circleSegmentCount));
-        float vx = cos(cornerIndex * angle);
-        float vy = sin(cornerIndex * angle);
-        float xVector = getRadius().x * vx;
-        float yVector = getRadius().x * vy;
-
-        x = getRadius().x - xVector;
-        y =  getRadius().x + yVector;
+        sf::Vector2f vector = calculateCornerVectors(cornerIndex);
+        x = getRadius().x - vector.x;
+        y =  getRadius().x - vector.y;
     }
 
     return sf::Vector2f(x,y);

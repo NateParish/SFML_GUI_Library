@@ -9,13 +9,9 @@ class Button : public Widget
 
 private:
 
-	//float x;
-	//float y;
-	//float width;
-	//float height;
 	float radius;
 
-	sf::Color bgColor;
+	/*sf::Color bgColor;
 	sf::Color highlightColor;
 
 	int outlineThickness;
@@ -28,7 +24,7 @@ private:
 	float shadowThicknessBottom;
 	float shadowThicknessTop;
 	float shadowThicknessLeft;
-	float shadowThicknessRight;
+	float shadowThicknessRight;*/
 
 
 	
