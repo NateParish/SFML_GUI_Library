@@ -22,7 +22,6 @@ Button::Button()
 	shadowRect.setOutlineColor(getShadowOutlineColor());
 		
 
-	window;
 	labelText = "Button Name";
 	textPadX = 15;
 	textPadY = 2;
@@ -44,33 +43,33 @@ Button::~Button()
 
 }
 
-bool Button::CheckIfMouseHover()
-{
-	sf::Mouse mouse;
-	int mousePosX = mouse.getPosition(*window).x;
-	int mousePosY = mouse.getPosition(*window).y;
-
-	
-	bool mouseOverButton = false;
-
-
-	if (mousePosX >= getX())
-	{
-		if (mousePosX <= getX() + getWidth())
-		{
-			if (mousePosY >= getY())
-			{
-				if (mousePosY <= getY() + getHeight())
-				{
-					mouseOverButton = true;
-					
-				}				
-			}			
-		}
-	}
-
-	return mouseOverButton;
-}
+//bool Button::CheckIfMouseHover()
+//{
+//	sf::Mouse mouse;
+//	int mousePosX = mouse.getPosition(*window).x;
+//	int mousePosY = mouse.getPosition(*window).y;
+//
+//	
+//	bool mouseOverButton = false;
+//
+//
+//	if (mousePosX >= getX())
+//	{
+//		if (mousePosX <= getX() + getWidth())
+//		{
+//			if (mousePosY >= getY())
+//			{
+//				if (mousePosY <= getY() + getHeight())
+//				{
+//					mouseOverButton = true;
+//					
+//				}				
+//			}			
+//		}
+//	}
+//
+//	return mouseOverButton;
+//}
 
 void Button::Highlight()
 {
@@ -88,15 +87,11 @@ void Button::NoHighlight()
 
 void Button::Draw()
 {
-	window->draw(shadowRect);
-	window->draw(rect);
-	window->draw(buttonLabel);
+	getWindow()->draw(shadowRect);
+	getWindow()->draw(rect);
+	getWindow()->draw(buttonLabel);
 }
 
-void Button::setWindow(sf::RenderWindow* windowPtr)
-{
-	window = windowPtr;
-}
 
 void Button::SetPosition(float posX, float posY)
 {
@@ -124,7 +119,7 @@ void Button::OnClick()
 {
 
 	sf::Mouse mouse;
-	int mousePosX = mouse.getPosition(*window).x;
-	int mousePosY = mouse.getPosition(*window).y;
+	int mousePosX = mouse.getPosition(*getWindow()).x;
+	int mousePosY = mouse.getPosition(*getWindow()).y;
 	std::cout << "CLICKED!" << getWidth() << " " << getHeight() << " " << mousePosX << " " << mousePosY << " " << getX() << " " << getY() <<  " " << getX() - mousePosX << " " << getY() - mousePosY << std::endl;
 }

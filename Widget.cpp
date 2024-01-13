@@ -7,6 +7,7 @@ Widget::Widget()
 	width = 150;
 	height = 30;
 
+
 	bgColor = sf::Color(230,230,230);
 	highlightColor = sf::Color(50,250,250);
 	selected = false;
@@ -72,6 +73,16 @@ void Widget::setHeight(float newHeight)
 bool Widget::getSelected()
 {
 	return selected;
+}
+
+sf::RenderWindow* Widget::getWindow()
+{
+	return window;
+}
+
+void Widget::setWindow(sf::RenderWindow* windowPtr)
+{
+	window = windowPtr;
 }
 
 void Widget::setSelected(bool newSelected)
@@ -203,6 +214,33 @@ void Widget::moveWithMouse()
 	std::cout << "and we're moving, and we're moving.. " << std::endl;
 }
 
+bool Widget::checkIfMouseHover()
+{
+	sf::Mouse mouse;
+	int mousePosX = mouse.getPosition(*window).x;
+	int mousePosY = mouse.getPosition(*window).y;
+
+
+	bool mouseOverWidget = false;
+
+
+	if (mousePosX >= getX())
+	{
+		if (mousePosX <= getX() + getWidth())
+		{
+			if (mousePosY >= getY())
+			{
+				if (mousePosY <= getY() + getHeight())
+				{
+					mouseOverWidget = true;
+
+				}
+			}
+		}
+	}
+
+	return mouseOverWidget;
+}
 
 
 

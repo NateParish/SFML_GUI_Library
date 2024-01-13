@@ -12,6 +12,8 @@ private:
 	float width;
 	float height;
 
+	sf::RenderWindow* window;
+
 	bool selected;
 
 	sf::Color bgColor;
@@ -44,6 +46,8 @@ public:
 	void setHeight(float newHeight);
 	bool getSelected();
 	void setSelected(bool newSelected);
+	sf::RenderWindow* getWindow();
+	void setWindow(sf::RenderWindow* windowPtr);
 	sf::Color getBGColor();
 	void setBGColor(sf::Color newColor);
 	sf::Color getHighlightColor();
@@ -68,7 +72,7 @@ public:
 	void setShadowThicknessLeft(float newThickness);
 	float getShadowThicknessRight();
 	void setShadowThicknessRight(float newThickness);
-
 	void moveWithMouse();
+	bool checkIfMouseHover();
 };
 

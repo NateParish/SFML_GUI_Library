@@ -94,7 +94,7 @@ void GUI::Launch()
 
 		for (Button* button : listOfButtons)
 		{
-			if (button->CheckIfMouseHover())
+			if (button->checkIfMouseHover())
 			{
 				button->Highlight();
 				setToHandCursor = true;
