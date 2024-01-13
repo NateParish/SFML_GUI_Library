@@ -6,6 +6,8 @@
 #include "EllipseShape.h"
 #include "Button.h"
 #include "GUI.h"
+//#include <SFML/glad/glad.h>
+//#include <GLFW/glfw3.h>
 
 
 int main()
