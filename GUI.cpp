@@ -45,6 +45,7 @@ void GUI::Launch()
 	star.setOutlineColor(sf::Color(0, 0, 0));
 	star.setOutlineThickness(5);
 
+
 	sf::Cursor handCursor;
 	handCursor.loadFromSystem(sf::Cursor::Hand);
 	sf::Cursor arrowCursor;
@@ -89,6 +90,7 @@ void GUI::Launch()
 			}
 
 		}
+
 
 		for (Button* button : listOfButtons)
 		{

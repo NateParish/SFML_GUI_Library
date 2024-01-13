@@ -76,7 +76,7 @@ bool Widget::getSelected()
 
 void Widget::setSelected(bool newSelected)
 {
-
+	selected = newSelected;
 }
 
 sf::Color Widget::getBGColor()

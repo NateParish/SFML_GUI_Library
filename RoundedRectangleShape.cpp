@@ -10,7 +10,6 @@ RoundedRectangle::RoundedRectangle()
 
 void RoundedRectangle::setRadius(float cornerRadius)
 {
-
     const sf::Vector2f radiusAsVector(cornerRadius,0);      
     m_radius = radiusAsVector;
     update();
@@ -30,8 +29,6 @@ int RoundedRectangle::getPointsPerCorner() const
 {
     return pointsPerCorner;
 }
-
-
 
 std::size_t RoundedRectangle::getPointCount() const
 {
@@ -61,27 +58,27 @@ sf::Vector2f RoundedRectangle::calculateCornerVectors(int cornerIndex) const
 sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
 {
 
-    int points = getPointsPerCorner();
+    int pointsPerCorner = getPointsPerCorner();
     float x = 0;
     float y = 0;
 
     int p1 = 0;
     int p2 = 1;
-    int c1Start = p2+1;
+    int curve1Start = p2+1;
 
-    int p3 = c1Start + points;
+    int p3 = curve1Start + pointsPerCorner;
     int p4 = p3 + 1;
 
-    int c2Start = p4 + 1;
-    int p5 = c2Start + points;
+    int curve2Start = p4 + 1;
+    int p5 = curve2Start + pointsPerCorner;
     int p6 = p5+1;
 
-    int c3Start = p5 + 1;
+    int curve3Start = p5 + 1;
 
-    int p7 = c3Start + points + 1;;
+    int p7 = curve3Start + pointsPerCorner + 1;;
     int p8 = p7+1;
 
-    int c4Start = p8 + 1;
+    int curve4Start = p8 + 1;
 
     // Top Line
 
@@ -103,7 +100,7 @@ sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
     {
         if (index < p3)
         {
-            int cornerIndex = points - (index - c1Start);
+            int cornerIndex = pointsPerCorner - (index - curve1Start);
             sf::Vector2f vector = calculateCornerVectors(cornerIndex);
             x = getSize().x - getRadius().x + vector.x;
             y = getRadius().x - vector.y;
@@ -133,7 +130,7 @@ sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
         if (index < p5)
         {
 
-            int cornerIndex = (index - c2Start) + 1;
+            int cornerIndex = (index - curve2Start) + 1;
             sf::Vector2f vector = calculateCornerVectors(cornerIndex);
             x = getSize().x- getRadius().x + vector.x;
             y = getSize().y - getRadius().x + vector.y;
@@ -161,7 +158,7 @@ sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
     {
         if (index < p7)
         {
-            int cornerIndex = points - (index - c3Start) + 1;
+            int cornerIndex = pointsPerCorner - (index - curve3Start) + 1;
             sf::Vector2f vector = calculateCornerVectors(cornerIndex);
             x = getRadius().x - vector.x;
             y = getSize().y - getRadius().x + vector.y;
@@ -187,7 +184,7 @@ sf::Vector2f RoundedRectangle::getPoint(std::size_t index) const
     if (index > p8)
 
     {
-        int cornerIndex = (index - c4Start) + 1;
+        int cornerIndex = (index - curve4Start) + 1;
         sf::Vector2f vector = calculateCornerVectors(cornerIndex);
         x = getRadius().x - vector.x;
         y =  getRadius().x - vector.y;

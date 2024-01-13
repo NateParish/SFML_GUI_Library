@@ -122,5 +122,9 @@ void Button::SetTextPad(float xPad, float yPad)
 
 void Button::OnClick()
 {
-	std::cout << "CLICKED!" << std::endl;
+
+	sf::Mouse mouse;
+	int mousePosX = mouse.getPosition(*window).x;
+	int mousePosY = mouse.getPosition(*window).y;
+	std::cout << "CLICKED!" << getWidth() << " " << getHeight() << " " << mousePosX << " " << mousePosY << " " << getX() << " " << getY() <<  " " << getX() - mousePosX << " " << getY() - mousePosY << std::endl;
 }
