@@ -38,6 +38,7 @@ int main()
 
 	GUI testGUI; 
 	testGUI.addButton(&testButton);
+	testButton.setSize(sf::Vector2f(150, 30));
 	//testButton.setWidth(150);
 	//testButton.setHeight(80);
 	//testButton.SetTextPad(10, 0);

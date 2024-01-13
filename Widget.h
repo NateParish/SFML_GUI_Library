@@ -44,6 +44,8 @@ public:
 	void setWidth(float newWidth);
 	float getHeight();
 	void setHeight(float newHeight);
+	sf::Vector2f getSize();
+	//void setSize(sf::Vector2f newSize);
 	bool getSelected();
 	void setSelected(bool newSelected);
 	sf::RenderWindow* getWindow();

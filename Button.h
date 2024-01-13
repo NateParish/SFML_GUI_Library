@@ -9,7 +9,10 @@ class Button : public Widget
 
 private:
 
+	//float width;
+	//float height;
 	float radius;
+
 
 	
 	RoundedRectangle rect;
@@ -32,10 +35,16 @@ public:
 	void NoHighlight();
 	void Draw();
 	//void setWindow(sf::RenderWindow* windowPtr);
+	//float getWidth();
+	//void setWidth(float newWidth);
+	//float getHeight();
+	//void setHeight(float newHeight);
+	sf::Vector2f getSize();
+	void setSize(sf::Vector2f newSize);
 	void SetPosition(float posX, float posY);
 	void SetTextPosition(float posX, float posY);
 	void SetTextPad(float posX, float posY);
-	void OnClick();
+	void onClick();
 
 };
 

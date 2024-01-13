@@ -4,8 +4,8 @@ Widget::Widget()
 {
 	x = 0;
 	y = 0;
-	width = 150;
-	height = 30;
+	width = 0;
+	height = 0;
 
 
 	bgColor = sf::Color(230,230,230);
@@ -69,6 +69,16 @@ void Widget::setHeight(float newHeight)
 {
 	height = newHeight;
 }
+sf::Vector2f Widget::getSize()
+{
+	return sf::Vector2f(getWidth(), getHeight());
+}
+
+//void Widget::setSize(sf::Vector2f newSize)
+//{
+//	setWidth(newSize.x);
+//	setHeight(newSize.y);
+//}
 
 bool Widget::getSelected()
 {

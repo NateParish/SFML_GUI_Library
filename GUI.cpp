@@ -8,6 +8,7 @@ GUI::GUI()
 	windowTitle = "GUI Testing";
 
 	listOfButtons;
+	listOfTextBoxes;
 
 }
 
@@ -45,6 +46,12 @@ void GUI::Launch()
 	star.setOutlineColor(sf::Color(0, 0, 0));
 	star.setOutlineThickness(5);
 
+	TextBox textBox;
+
+	textBox.setSize(sf::Vector2f(350, 30));
+	textBox.setPosition(250, 350);
+	textBox.setWindow(windowPtr);
+	listOfTextBoxes.push_back(&textBox);
 
 	sf::Cursor handCursor;
 	handCursor.loadFromSystem(sf::Cursor::Hand);
@@ -64,7 +71,11 @@ void GUI::Launch()
 
 		while (window.pollEvent(e))
 		{
-
+			if (e.type == sf::Event::KeyPressed)
+			{
+				std::string textToAdd = textBox.getPressedKey(e);
+				textBox.addTextToString(textToAdd);
+			}
 
 			mouseClickFlag = false;
 
@@ -91,6 +102,25 @@ void GUI::Launch()
 
 		}
 
+		for (TextBox* textBox : listOfTextBoxes)
+		{
+			if (textBox->checkIfMouseHover())
+			{
+				textBox->Highlight();
+				if (mouseClickFlag)
+				{
+					textBox->onClick();
+				}
+			}
+			else
+			{
+				textBox->NoHighlight();
+			}
+
+			textBox->Draw();
+
+		}
+
 
 		for (Button* button : listOfButtons)
 		{
@@ -100,13 +130,11 @@ void GUI::Launch()
 				setToHandCursor = true;
 				setToArrowCursor = false;
 
-
-
 				if (mouseClickFlag)
 				{
 					if (!triggered)
 					{
-						button->OnClick();
+						button->onClick();
 						triggered = true;
 					}
 				}
@@ -135,6 +163,7 @@ void GUI::Launch()
 		}
 
 		window.draw(star);
+		//textBox.Draw();
 		window.display();
 
 	}

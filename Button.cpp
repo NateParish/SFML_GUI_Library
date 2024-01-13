@@ -43,34 +43,6 @@ Button::~Button()
 
 }
 
-//bool Button::CheckIfMouseHover()
-//{
-//	sf::Mouse mouse;
-//	int mousePosX = mouse.getPosition(*window).x;
-//	int mousePosY = mouse.getPosition(*window).y;
-//
-//	
-//	bool mouseOverButton = false;
-//
-//
-//	if (mousePosX >= getX())
-//	{
-//		if (mousePosX <= getX() + getWidth())
-//		{
-//			if (mousePosY >= getY())
-//			{
-//				if (mousePosY <= getY() + getHeight())
-//				{
-//					mouseOverButton = true;
-//					
-//				}				
-//			}			
-//		}
-//	}
-//
-//	return mouseOverButton;
-//}
-
 void Button::Highlight()
 {
 	rect.setFillColor(getHighlightColor());
@@ -92,6 +64,28 @@ void Button::Draw()
 	getWindow()->draw(buttonLabel);
 }
 
+//float Button::getWidth()
+//{
+//	return width;
+//}
+
+//float Button::getHeight()
+//{
+//	return height;
+//}
+
+sf::Vector2f Button::getSize()
+{
+	return sf::Vector2f(getWidth(), getHeight());
+}
+
+void Button::setSize(sf::Vector2f newSize)
+{
+	setWidth(newSize.x);
+	setHeight(newSize.y);
+	rect.setSize(sf::Vector2f(newSize.x, newSize.y));
+	shadowRect.setSize(sf::Vector2f(newSize.x + getShadowThicknessLeft() + getShadowThicknessRight(), newSize.y + getShadowThicknessTop() + getShadowThicknessBottom()));
+}
 
 void Button::SetPosition(float posX, float posY)
 {
@@ -115,7 +109,7 @@ void Button::SetTextPad(float xPad, float yPad)
 	buttonLabel.setPosition(sf::Vector2f(getX() + textPadX, getY() + textPadY));
 }
 
-void Button::OnClick()
+void Button::onClick()
 {
 
 	sf::Mouse mouse;
