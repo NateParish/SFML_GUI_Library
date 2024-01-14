@@ -33,9 +33,11 @@ void GUI::Launch()
 	pushWindowPtrToButtons(windowPtr);
 	bool setToHandCursor = true;
 	bool setToArrowCursor = false;
+	bool setToTextCursor = false;
 	bool mouseClickFlag = false;
 	bool mouseReleaseFlag = false;
 	bool triggered = false;
+	int frameCounter = 0;
 
 	auto b1funct = Button1Function;
 
@@ -57,17 +59,35 @@ void GUI::Launch()
 	handCursor.loadFromSystem(sf::Cursor::Hand);
 	sf::Cursor arrowCursor;
 	arrowCursor.loadFromSystem(sf::Cursor::Arrow);
+	sf::Cursor textCursor;
+	textCursor.loadFromSystem(sf::Cursor::Text);
 
+	window.setFramerateLimit(60);
 	sf::Event e;
+	sf::Mouse mouse;
 	
 	while (window.isOpen())
 	{
 		
+		
+
 		window.clear(sf::Color(240, 240, 240));
 		setToArrowCursor = true;
 		setToHandCursor = false;
+		setToTextCursor = false;
 		
+		if (frameCounter == 59)
+		{
+			frameCounter = 0;
+		}
+		else
+		{
+			frameCounter++;
+		}
 
+		sf::Vector2f mousePosition(mouse.getPosition(window));
+		//int mousePosX = mouse.getPosition(*window).x;
+		//int mousePosY = mouse.getPosition(*window).y;
 
 		while (window.pollEvent(e))
 		{
@@ -104,12 +124,28 @@ void GUI::Launch()
 
 		for (TextBox* textBox : listOfTextBoxes)
 		{
+
+			textBox->characterHovered(mousePosition);
+
+			if (frameCounter < 30)
+			{
+				textBox->caretBlinkOn();
+			}
+			else
+			{
+				textBox->caretBlinkOff();
+			}
+
 			if (textBox->checkIfMouseHover())
 			{
 				textBox->Highlight();
+				setToTextCursor = true;
+				setToArrowCursor = false;
+
 				if (mouseClickFlag)
 				{
 					textBox->onClick();
+					
 				}
 			}
 			else
@@ -156,6 +192,10 @@ void GUI::Launch()
 		if (setToHandCursor)
 		{
 			window.setMouseCursor(handCursor);
+		}
+		if (setToTextCursor)
+		{
+			window.setMouseCursor(textCursor);
 		}
 		if (setToArrowCursor)
 		{

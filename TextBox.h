@@ -3,6 +3,7 @@
 #include "RoundedRectangleShape.h"
 #include <iostream>
 #include <string>
+
 class TextBox : public Widget
 {
 
@@ -14,6 +15,11 @@ private:
 	sf::RenderWindow* window;
 	RoundedRectangle rect;
 	RoundedRectangle shadowRect;
+
+	sf::RectangleShape caret;
+	bool renderCaret;
+	float caretXOffset;
+
 
 	std::string textString1;
 
@@ -44,4 +50,8 @@ public:
 	void addTextToString(std::string text);
 	void deleteLastCharacter();
 	//void OnClick();
+	sf::Vector2f characterHovered(sf::Vector2f mousePosition);
+	void caretBlinkOn();
+	void caretBlinkOff();
+	void caretShiftRight();
 };

@@ -38,6 +38,12 @@ TextBox::TextBox()
 	text.setCharacterSize(20);
 	text.setPosition(getX() + textPadX, getY() + textPadY);
 
+	caret.setSize(sf::Vector2f(1, text.getCharacterSize()));
+	caret.setPosition(text.getPosition().x + caretXOffset, text.getPosition().y);
+	caret.setFillColor(sf::Color(50,50,50));
+	caretXOffset = 0;
+	renderCaret = false;
+
 }
 
 TextBox::~TextBox()
@@ -64,6 +70,11 @@ void TextBox::Draw()
 	getWindow()->draw(shadowRect);
 	getWindow()->draw(rect);
 	getWindow()->draw(text);
+	if (renderCaret)
+	{
+		getWindow()->draw(caret);
+	}
+
 }
 
 sf::Vector2f TextBox::getSize()
@@ -86,6 +97,7 @@ void TextBox::setPosition(float posX, float posY)
 
 	rect.setPosition(sf::Vector2f(getX(), getY()));
 	text.setPosition(sf::Vector2f(getX() + textPadX, getY() + textPadY));
+	caret.setPosition(text.getPosition().x, text.getPosition().y + textPadY);
 	shadowRect.setPosition(sf::Vector2f(getX() - getShadowThicknessLeft(), getY() - getShadowThicknessTop()));
 }
 
@@ -104,7 +116,7 @@ void TextBox::SetTextPad(float xPad, float yPad)
 void TextBox::onClick()
 {
 	selected = true;
-	std::cout << "CLICKED!" << std::endl;
+	//std::cout << "CLICKED!" << std::endl;
 }
 
 std::string TextBox::getPressedKey(sf::Event e)
@@ -516,6 +528,131 @@ std::string TextBox::getPressedKey(sf::Event e)
 			output = "0";
 		}
 	}
+	if (keycode == sf::Keyboard::Comma)
+	{
+		if (capitalized)
+		{
+			output = "<";
+		}
+		else
+		{
+			output = ",";
+		}
+	}
+	if (keycode == sf::Keyboard::Period)
+	{
+		if (capitalized)
+		{
+			output = ">";
+		}
+		else
+		{
+			output = ".";
+		}
+	}
+	if (keycode == sf::Keyboard::Slash)
+	{
+		if (capitalized)
+		{
+			output = "?";
+		}
+		else
+		{
+			output = "/";
+		}
+	}
+	if (keycode == sf::Keyboard::Semicolon)
+	{
+		if (capitalized)
+		{
+			output = ":";
+		}
+		else
+		{
+			output = ";";
+		}
+	}
+	if (keycode == sf::Keyboard::Apostrophe)
+	{
+		if (capitalized)
+		{
+			output = '"';
+		}
+		else
+		{
+			output = "'";
+		}
+	}
+	if (keycode == sf::Keyboard::Grave)
+	{
+		if (capitalized)
+		{
+			output = "~";
+		}
+		else
+		{
+			output = "`";
+		}
+	}
+	if (keycode == sf::Keyboard::Dash)
+	{
+		if (capitalized)
+		{
+			output = "_";
+		}
+		else
+		{
+			output = "-";
+		}
+	}
+	if (keycode == sf::Keyboard::Equal)
+	{
+		if (capitalized)
+		{
+			output = "+";
+		}
+		else
+		{
+			output = "=";
+		}
+	}
+	if (keycode == sf::Keyboard::LBracket)
+	{
+		if (capitalized)
+		{
+			output = "{";
+		}
+		else
+		{
+			output = "[";
+		}
+	}
+	if (keycode == sf::Keyboard::RBracket)
+	{
+		if (capitalized)
+		{
+			output = "}";
+		}
+		else
+		{
+			output = "]";
+		}
+	}
+	if (keycode == sf::Keyboard::Backslash)
+	{
+		if (capitalized)
+		{
+			output = "|";
+		}
+		else
+		{
+			output = R"raw(\)raw";
+			//output = R"raw(a\sb)raw";
+		}
+	}
+
+
+
 	if (keycode == sf::Keyboard::Space)
 	{
 		output = " ";
@@ -539,4 +676,71 @@ void TextBox::addTextToString(std::string newText)
 void TextBox::deleteLastCharacter()
 {
 	textString1 = textString1.substr(0, textString1.size() - 1);
+}
+
+sf::Vector2f TextBox::characterHovered(sf::Vector2f mousePosition)
+{
+	int charWidth = text.getCharacterSize();
+	//std::cout << mousePosition.x << " " << mousePosition.y << std::endl;
+	int stringLength = size(textString1);
+	std::string textString = text.getString();
+	sf::Text tempText;
+
+	tempText.setString(textString1 + " ");
+	tempText.setFont(font);
+	//text.setFillColor(textColor);
+	tempText.setCharacterSize(text.getCharacterSize());
+	std::string textString2 = tempText.getString();
+
+
+	//std::cout << textString2 << std::endl;
+	//text.setPosition(getX() + textPadX, getY() + textPadY);
+
+	
+	for (int i = 0; i < stringLength; i++)
+	{
+		charWidth = tempText.findCharacterPos(i + 1).x - tempText.findCharacterPos(i).x;
+
+		if (mousePosition.x > text.findCharacterPos(i).x)
+		{
+			if (mousePosition.x < text.findCharacterPos(i).x + charWidth)
+			{
+				if (mousePosition.y > text.findCharacterPos(i).y)
+				{
+					if (mousePosition.y < text.findCharacterPos(i).y + text.getCharacterSize())
+					{
+						std::cout << textString[i] << std::endl;
+					}
+				}
+			}
+		}
+	}
+
+	//std::cout << std::endl;
+	return sf::Vector2f(100,100);
+}
+
+void TextBox::caretBlinkOn()
+{
+	renderCaret = true;
+}
+
+void TextBox::caretBlinkOff()
+{
+	renderCaret = false;
+}
+
+void TextBox::caretShiftRight()
+{
+	int charWidth = text.getCharacterSize();
+	int stringLength = size(textString1);
+	std::string textString = text.getString();
+	sf::Text tempText;
+
+	tempText.setString(textString1 + " ");
+	tempText.setFont(font);
+	tempText.setCharacterSize(text.getCharacterSize());
+	std::string textString2 = tempText.getString();
+
+	charWidth = tempText.findCharacterPos(stringLength + 1).x - tempText.findCharacterPos(stringLength).x;
 }
